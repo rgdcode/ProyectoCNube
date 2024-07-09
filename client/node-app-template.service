@@ -1,0 +1,14 @@
+[Unit]
+Description= un cliente web para el manejo de personas
+Documentation=https://github.com/aesr00/ccfrontend.git
+After=network.target
+
+[Service]
+Environment=PORT=3000
+Type=simple
+User=<linux-user>
+ExecStart=/usr/bin/node /opt/ccfrontend/source/main.ts
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
