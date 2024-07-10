@@ -18,3 +18,13 @@ jobs:
       run: |
             cd client
             docker build . --file Dockerfile --tag client:$(date +%s)
+            
+    - uses: actions/checkout@v4
+    - name: Publicar Imagen a docker hub
+      run: |
+            cd client
+            docker tag client bryanrgd/client:latest
+            docker push bryanrgd/client:latest
+
+
+    
