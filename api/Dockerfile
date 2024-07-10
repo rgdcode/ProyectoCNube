@@ -15,7 +15,7 @@ RUN npm run build
 FROM base as runner 
 
 ENV PORT=3000
-
+ENV DB_URI=mongodb+srv://brgalindo18:26152823bgr$@proyectosrgd.rdexbis.mongodb.net/?retryWrites=true&w=majority&appName=ProyectosRGD
 EXPOSE $PORT
 
 CMD ["npm", "start"]

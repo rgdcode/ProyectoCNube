@@ -5,9 +5,7 @@ COPY . .
 
 FROM base AS builder
 WORKDIR /app 
-# COPY .gitignore .gitignore
-# COPY --from=builder /app/out/json/ .
-# COPY --from=builder /app/out/package-lock.json ./package-lock.json
+
 RUN npm ci 
 
 RUN npm run build
@@ -15,6 +13,7 @@ RUN npm run build
 FROM base as runner
 
 ENV PORT=3001
+ENV NEXT_PUBLIC_API_URL=http://localhost:3000
 
 EXPOSE $PORT
 
