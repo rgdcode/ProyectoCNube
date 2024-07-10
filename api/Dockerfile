@@ -8,7 +8,7 @@ WORKDIR /app
 # COPY .gitignore .gitignore
 # COPY --from=builder /app/out/json/ .
 # COPY --from=builder /app/out/package-lock.json ./package-lock.json
-RUN npm ci 
+RUN npm i 
 
 RUN npm run build
 
