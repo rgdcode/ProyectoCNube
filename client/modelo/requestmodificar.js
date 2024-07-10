@@ -4,7 +4,7 @@ export default async function requestModificar(ced, nom, ape) {
     nombre: nom,
     apellido: ape,
   };
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${ced}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/personas/${ced}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(persona),

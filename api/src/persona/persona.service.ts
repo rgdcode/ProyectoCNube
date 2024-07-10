@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Persona } from './schemas/persona.schema';
-import mongoose from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 @Injectable()
 export class PersonaService {
   constructor(
     @InjectModel(Persona.name)
-    private personaModel: mongoose.Model<Persona>,
+    @InjectModel(Persona.name) private readonly personaModel: Model<Persona>,
   ) {}
 
   async buscartodos(): Promise<Persona[]> {
@@ -21,17 +21,21 @@ export class PersonaService {
   }
 
   async buscar(cedula: number): Promise<Persona> {
-    const res = await this.personaModel.findById(cedula);
+    const res = await this.personaModel.findOne({ cedula }).exec();
     return res;
   }
 
   async modificar(cedula: number, persona: Persona): Promise<Persona> {
-    const res = await this.personaModel.findByIdAndUpdate(cedula, persona, {
-      new: true,
-      runValidators: true,
-    });
+    const res = await this.personaModel.findOneAndUpdate(
+      { cedula }, 
+      { $set: persona }, 
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).exec();
     return res;
-  }
+  }  
 
   async eliminar(cedula: number): Promise<Persona> {
     const res = await this.personaModel.find({ cedula }).deleteOne();

@@ -14,7 +14,7 @@ import { UpdatePersonaDto } from './dto/updae-persona.dto';
 
 @Controller('personas')
 export class PersonaController {
-  constructor(private personaService: PersonaService) {}
+  constructor(private readonly personaService: PersonaService) {}
 
   @Get('')
   async buscartodos(): Promise<Persona[]> {
