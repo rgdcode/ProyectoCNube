@@ -1,0 +1,20 @@
+name: Docker Image CI client
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image-client
+      run: |
+            cd client
+            docker build . --file Dockerfile --tag client:$(date +%s)
